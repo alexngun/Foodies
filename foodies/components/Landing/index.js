@@ -7,11 +7,11 @@ import { fadeIn, staggerContainer, MainWrapper, MainAnimate, LeavesContainer, Le
 
 function Landing() {
   return (
-    <div className='flex w-full h-[1000px] sm:h-auto flex-col sm:flex-row overflow-hidden'>
-        <div className='sm:w-2/5 h-3/5 py-10'> 
+    <div className='flex w-full h-[1000px] lg:h-auto flex-col lg:flex-row overflow-hidden'>
+        <div className='lg:w-2/5 h-3/5 py-10 '> 
             <Greeting/> 
         </div>
-        <div className='relative sm:h-[500px] sm:w-3/5 h-2/5 order-first sm:order-last '>
+        <div className='relative lg:h-[500px] lg:w-3/5 h-2/5 order-first lg:order-last overflow-hidden'>
 
             {/* Text */}
             <AnimatedObject className="absolute w-full h-full flex justify-center items-center" variants={staggerContainer} initial animate>

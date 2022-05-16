@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SingleWindow({className, size, component, title, des, center}) {
+function SingleWindow({className, size, component, title, des, center, titleColor=""}) {
 
     var sizeStyle
 
@@ -25,15 +25,15 @@ function SingleWindow({className, size, component, title, des, center}) {
     }
 
     return (
-        <section className={`${className?className:""} w-full min-h-[${sizeStyle}] px-4`}>
-            {title && <h1 className={`text-2xl text-green-700 ${center ? "text-center" : "text-left"} my-0`}>{title}</h1>}
-            {des && <div className={`text-md text-gray-600 ${center ? "text-center" : "text-left"}`}>{des}</div>}
+        <section className={`${className?className:""} flex flex-col w-full min-h-[${sizeStyle}] px-4`}>
+            {title && <h1 className={`text-[40px] ${titleColor} ${center ? "text-center" : "text-left"} my-0`}>{title}</h1>}
+            {des && <div className={`text-[18px] ${titleColor}/70 ${center ? "text-center" : "text-left"}`}>{des}</div>}
             {component}
         </section>
     )
 }
 
-function DualWindow({className, size, component1, component2, title1, title2, des1, des2, center}) {
+function DualWindow({className, size, component1, component2, title1, title2, des1, des2, center, alcenter}) {
 
     var sizeStyle
 
@@ -58,15 +58,15 @@ function DualWindow({className, size, component1, component2, title1, title2, de
     }
 
     return (
-        <section className={`${className?className:""} w-full min-h-[${sizeStyle}] flex`}>
-            <div className='w-1/2 h-full'>
-                {title1 && <h1 className={`my-0 text-2xl text-green-700 ${center ? "text-center" : "text-left"}`}>{title1}</h1>}
-                {des1 && <div className={`text-md text-gray-600 ${center ? "text-center" : "text-left"}`}>{des1}</div>}
+        <section className={`${className?className:""} w-full h-[${sizeStyle}] min-h-[${sizeStyle}] lg:flex-row flex-col flex px-4`}>
+            <div className={`${alcenter?"justify-center":""} lg:w-1/2 h-full flex flex-col`}>
+                {title1 && <h1 className={`my-0 text-[40px] text-green-700 ${center ? "text-center" : "text-left"}`}>{title1}</h1>}
+                {des1 && <div className={`text-md text-gray-600 ${center ? "text-center" : "text-left"} mt-2`}>{des1}</div>}
                 {component1}
             </div>
-            <div className='w-1/2 h-full'>
-                {title2 && <h1 className={`my-0 text-2xl text-green-700 ${center ? "text-center" : "text-left"}`}>{title2}</h1>}
-                {des2 && <div className={`text-md text-gray-600 ${center ? "text-center" : "text-left"}`}>{des2}</div>}
+            <div className={`${alcenter?"justify-center":""} lg:w-1/2 h-full flex flex-col`}>
+                {title2 && <h1 className={`my-0 text-[40px] text-green-700 ${center ? "text-center" : "text-left"}`}>{title2}</h1>}
+                {des2 && <div className={`text-md text-gray-600 ${center ? "text-center" : "text-left"} mt-2`}>{des2}</div>}
                 {component2}
             </div>
         </section>
