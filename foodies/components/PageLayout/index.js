@@ -76,7 +76,7 @@ function DualWindow({className, size, component1, component2, title1, title2, de
 
 function Page({children}) {
   return (
-    <main className='grow w-full'>
+    <main className='grow w-full top-[80px] h-fit'>
         <div className="max-w-[1200px] mx-auto w-full h-full py-5">
             {children}
         </div>
