@@ -11,53 +11,49 @@ here = [...here]
 
 function Greeting() {
 
-    const space = (
-        <span className='opacity-0'>l</span>
-    )
-
   return (
     <div className='sm:pr-8'>
         <h1 className='sm:mt-14 flex flex-wrap text-[50px] text-gray-800'> 
             Your healthy
-            {space}
-            <div className="h-[20px] flex">
-                { life.map( (letter, index) => 
-                    <MovingText
-                        key={`l-${index}`}
-                        className="inline text-sky-700"
-                        type="bounce"
-                        duration="4000ms"
-                        delay={`${index * 400}ms`}
-                        direction="normal"
-                        timing="ease-in-out"
-                        iteration="infinite"
-                        fillMode="none"
-                    >
-                        {letter}
-                    </MovingText>
-                )}
+            <div className="inline mx-2">
+                <div className="h-[20px] flex">
+                    { life.map( (letter, index) => 
+                        <MovingText
+                            key={`l-${index}`}
+                            className="inline text-sky-700"
+                            type="bounce"
+                            duration="4000ms"
+                            delay={`${index * 400}ms`}
+                            direction="normal"
+                            timing="ease-in-out"
+                            iteration="infinite"
+                            fillMode="none"
+                        >
+                            {letter}
+                        </MovingText>
+                    )}
+                </div>
             </div>
-            {space}
             starts
-            {space}
-            <div className="h-[20px] flex">
-                { here.map( (letter, index) => 
-                    <MovingText
-                        key={`h-${index}`}
-                        className="inline text-sky-700"
-                        type="bounce"
-                        duration="4000ms"
-                        delay={`${index * 400}ms`}
-                        direction="normal"
-                        timing="ease-in-out"
-                        iteration="infinite"
-                        fillMode="none"
-                    >
-                        {letter}
-                    </MovingText>
-                )}
+            <div className="inline mx-2">
+                <div className="h-[20px] flex">
+                    { here.map( (letter, index) => 
+                        <MovingText
+                            key={`h-${index}`}
+                            className="inline text-sky-700"
+                            type="bounce"
+                            duration="4000ms"
+                            delay={`${index * 400}ms`}
+                            direction="normal"
+                            timing="ease-in-out"
+                            iteration="infinite"
+                            fillMode="none"
+                        >
+                            {letter}
+                        </MovingText>
+                    )}
+                </div>
             </div>
-            {space}
             with us!
         </h1>
         

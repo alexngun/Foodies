@@ -7,7 +7,8 @@ function SideMenu() {
 
     const sideMenu = useSelector(state=>state.sideMenu)
 
-    sideMenu ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'scroll'
+    try { sideMenu ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'scroll' }
+    catch {}
 
     var scroll;
     try { scroll = window.pageYOffset || document.documentElement.scrollTop } 
