@@ -4,7 +4,7 @@ import { FaUserAlt } from 'react-icons/fa'
 import { Badge, Dropdown, Empty, Button } from 'antd'
 import { HiShoppingBag } from 'react-icons/hi'
 import Image from 'next/image'
-import CheckoutButton from '../CheckoutButton'
+import CheckoutButton from '../Buttons/CheckoutButton'
 import { IoMdSettings } from 'react-icons/io'
 import { BsBox } from 'react-icons/bs'
 import { ImEnter } from 'react-icons/im'
@@ -20,7 +20,7 @@ function Navbar() {
     const cartLength = cart.length
 
     const MiniCart = (
-        <div className='-translate-y-[4px] w-screen py-5 sm:border-t-4 flex flex-col items-center justify-center border sm:w-[300px] sm:rounded-b-lg'>
+        <div className='-translate-y-[4px] w-screen py-5 bg-white sm:border-t-4 sm:border-t-green-700 flex flex-col items-center justify-center border sm:w-[300px] sm:rounded-b-lg'>
             <h2 className='text-green-700 font-bold'>Shopping Cart</h2>
             { cartLength > 0 ? 
                 <ul className='w-full h-full px-5'>
@@ -46,7 +46,7 @@ function Navbar() {
     );
 
     const UserMenu = (
-        <div className='-translate-y-[4px] w-screen text-lg sm:text-sm pt-2 sm:border-t-4 flex flex-col items-center justify-center border sm:w-[200px] sm:rounded-b-lg'>
+        <div className='-translate-y-[4px] w-screen text-lg bg-white sm:text-sm pt-2 sm:border-t-4 sm:border-t-green-700 flex flex-col items-center justify-center border sm:w-[200px] sm:rounded-b-lg'>
             <ul className='w-full h-full px-5'>
                 <Link to="/account" className='border-b-[1px] my-1 py-1 text-green-700'>
                     <IoMdSettings/>
@@ -65,7 +65,7 @@ function Navbar() {
     )
 
   return (
-    <header className='w-full sticky top-0 bg-slate-100 h-14'>
+    <header className='w-full sticky top-0 h-14 z-10 bg-white'>
         <div className='max-w-[1200px] w-full h-full mx-auto px-4 flex items-center justify-between'>
             <BurgerMenuIcon className="block sm:hidden"/>
             <Brand/>
@@ -88,13 +88,13 @@ function Navbar() {
             </ul>
             <div className='flex space-x-3 h-full'>
 
-                <Dropdown overlay={UserMenu} trigger={['click']}>
+                <Dropdown overlay={UserMenu} trigger={['click']} placement="bottomRight">
                     <div onClick={()=>dispatch(closeSideMenu())} className="relative h-full hover:cursor-pointer flex items-center">
                         <FaUserAlt className='text-green-700 text-xl'/>
                     </div>
                 </Dropdown>
 
-                <Dropdown overlay={MiniCart} trigger={['click']}>
+                <Dropdown overlay={MiniCart} trigger={['click']} placement="bottomRight">
                     <div onClick={()=>dispatch(closeSideMenu())} className="relative h-full hover:cursor-pointer flex items-center">
                         <Badge count={cartLength} className="hover:cursor-pointer">
                             <HiShoppingBag className='text-green-700 text-2xl'/>

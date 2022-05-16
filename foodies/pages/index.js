@@ -1,11 +1,19 @@
-import Image from 'next/image'
 import Head from '../components/Head'
+import Page from '../components/PageLayout'
+import Landing from '../components/Landing'
 
 export default function Home() {
 
   return (
-    <div>
+    <div className='min-h-screen flex flex-col'>
       <Head/>
+      <Page>
+        <Page.SingleWindow size="2xl"
+          component={
+            <Landing/>
+          }
+        />
+      </Page>
     </div>
   )
 }
