@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router'
 
-function Link({className, children, to}) {
+function Link({className, children, color="text-green-700", to="/"}) {
 
   const router = useRouter();
 
   return (
     <div 
-        className={`w-full h-full flex items-center text-green-800 hover:cursor-pointer ${className?className:""}`}
+        className={`w-full h-full flex items-center ${color} hover:cursor-pointer ${className?className:""}`}
         onClick={()=>router.push(to)}
     >
         {children}
