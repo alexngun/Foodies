@@ -6,7 +6,7 @@ function SingleWindow({className, size, component, title, des, center, titleColo
 
     switch(size) {
         case 'sm':
-            sizeStyle = "350px"
+            sizeStyle = "250px"
             break;
         case 'md':
             sizeStyle = "400px"
@@ -26,8 +26,8 @@ function SingleWindow({className, size, component, title, des, center, titleColo
 
     return (
         <section className={`${className?className:""} flex flex-col w-full min-h-[${sizeStyle}] px-4 lg:h-[${sizeStyle}] h-fit`}>
-            {title && <h1 className={`text-[40px] ${titleColor} ${center ? "text-center" : "text-left"} my-0`}>{title}</h1>}
-            {des && <div className={`text-[18px] ${titleColor}/70 ${center ? "text-center" : "text-left"}`}>{des}</div>}
+            {title && <h1 className={`text-[30px] ${titleColor} ${center ? "text-center" : "text-left"} my-0`}>{title}</h1>}
+            {des && <div className={`text-lg mt-3 ${titleColor}/70 ${center ? "text-center" : "text-left"}`}>{des}</div>}
             {component}
         </section>
     )
@@ -73,6 +73,17 @@ function DualWindow({className, size, component1, component2, title1, title2, de
     )
 }
 
+function GridWindow({className="", gridStyle="", title, des, center, titleColor="", component}) {
+    return (
+        <section className={`${className} w-full h-fit flex flex-col`}>
+            {title && <h1 className={`text-[30px] ${titleColor} ${center ? "text-center" : "text-left"} my-0`}>{title}</h1>}
+            {des && <div className={`text-lg mt-3 ${titleColor}/70 ${center ? "text-center" : "text-left"}`}>{des}</div>}
+            <div className={`${gridStyle} grid`}>
+                {component}
+            </div>
+        </section>
+    )
+}
 
 function Page({children}) {
   return (
@@ -86,5 +97,6 @@ function Page({children}) {
 
 Page.SingleWindow = SingleWindow
 Page.DualWindow = DualWindow
+Page.GridWindow = GridWindow
 
 export default Page

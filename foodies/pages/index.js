@@ -5,7 +5,7 @@ import { Carousel } from 'antd'
 import NormalButton from '../components/Buttons/NormalButton'
 import ProductCards from '../components/ProductDisplay/ProductCards'
 import CommentSlider from '../components/Silder/commentSlider'
-import Image from 'next/image'
+import Sponsors from '../components/Footer/Sponsors'
 
 import { useRouter } from 'next/router'
 
@@ -37,25 +37,25 @@ export default function Home( {commentsFeed} ) {
                 <div className='bg-white p-8 rounded-full'>
                   <img className='w-[180px] h-[200px] object-contain' loading='lazy' src="/img/others/shop.svg" />
                 </div>
-                <div className='text-lg text-green-700 mt-2 font-bold'> Pick your meals online </div>
+                <div className='text-md text-green-700 mt-2 font-bold'> Pick your meals online </div>
               </div>
               <div className='h-full flex flex-col justify-center items-center'>
                 <div className='bg-white p-8 rounded-full'>
                   <img className='w-[180px] h-[200px] object-contain' loading='lazy' src="/img/others/cook.svg" />
                 </div>
-                <div className='text-lg text-green-700 mt-2 font-bold'> Meals cooked by chef </div>
+                <div className='text-md text-green-700 mt-2 font-bold'> Meals cooked by chef </div>
               </div>
               <div className='h-full flex flex-col justify-center items-center'>
                 <div className='bg-white p-8 rounded-full'>
                   <img className='w-[180px] h-[200px] object-contain' loading='lazy' src="/img/others/deliver.svg" />
                 </div>
-                <div className='text-lg text-green-700 mt-2 font-bold'> Instant shipment to your address</div>
+                <div className='text-md text-green-700 mt-2 font-bold'> Instant shipment to your address</div>
               </div>
               <div className='h-full flex flex-col justify-center items-center'>
                 <div className='bg-white p-8 rounded-full'>
                   <img className='w-[180px] h-[200px] object-contain' loading='lazy' src="/img/others/arrived.svg" />
                 </div>
-                <div className='text-lg text-green-700 mt-2 font-bold'> Orders delivered </div>
+                <div className='text-md text-green-700 mt-2 font-bold'> Orders delivered </div>
               </div>
 
             </div>
@@ -121,42 +121,6 @@ export default function Home( {commentsFeed} ) {
           component={
             <CommentSlider commentsFeed={commentsFeed}/>
           } 
-        />
-        {/* Sponsors */}
-        <Page.SingleWindow size="sm" className="mt-16"
-          component={
-            <div className='grid px-5 h-full w-full bg-gray-200 grid-cols-2 grid-rows-3 sm:grid-cols-3 sm:grid-rows-2  lg:grid-cols-6 lg:grid-rows-1 py-[100px]'>
-              <div className='h-[90px] w-full relative flex items-center justify-center'>
-                <Image src='/img/web/sponsor1.svg'
-                      objectFit='contain' height={60} width={215}
-                />
-              </div>
-              <div className='h-[90px] w-full relative flex items-center justify-center -translate-x-3'>
-                <Image src='/img/web/sponsor2.svg'
-                      objectFit='contain' height={40} width={215}
-                />
-              </div>
-              <div className='h-[90px] w-full relative flex items-center justify-center -translate-x-3'>
-                <Image src='/img/web/sponsor3.svg'
-                      objectFit='contain' height={40} width={215}
-                />
-              </div>
-              <div className='h-[90px] w-full relative flex items-center justify-center'>
-                <Image src='/img/web/sponsor4.svg'
-                      objectFit='contain' height={40} width={180}
-                />
-              </div>
-              <div className='h-[90px] w-full relative flex items-center justify-center translate-x-2'>
-                <Image src='/img/web/sponsor5.svg'
-                      objectFit='contain' height={40} width={170}
-                />
-              </div>
-              <div className='h-[90px] w-full relative flex items-center justify-center'>
-                <Image src='/img/web/sponsor6.svg'
-                      objectFit='contain' height={40} width={215}
-                />
-              </div>
-            </div>}
         />
       </Page>
       <Footer/>
