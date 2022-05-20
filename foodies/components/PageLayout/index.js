@@ -58,7 +58,7 @@ function DualWindow({className, size, component1, component2, title1, title2, de
     }
 
     return (
-        <section className={`${className?className:""} w-full lg:h-[${sizeStyle}] h-fit min-h-[${sizeStyle}] lg:flex-row flex-col flex px-4`}>
+        <section className={`${className?className:""} w-full lg:h-[450px] h-fit min-h-[${sizeStyle}] lg:flex-row flex-col flex px-4`}>
             <div className={`${alcenter?"justify-center":""} lg:w-1/2 h-full flex flex-col`}>
                 {title1 && <h1 className={`my-0 text-[40px] text-green-700 ${center ? "text-center" : "text-left"}`}>{title1}</h1>}
                 {des1 && <div className={`text-md text-gray-600 ${center ? "text-center" : "text-left"} mt-2`}>{des1}</div>}

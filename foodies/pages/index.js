@@ -1,15 +1,14 @@
-import Head from '../components/Head'
+import Header from '../components/Header'
 import Page from '../components/PageLayout'
 import Landing from '../components/Landing'
 import { Carousel } from 'antd'
 import NormalButton from '../components/Buttons/NormalButton'
 import ProductCards from '../components/ProductDisplay/ProductCards'
 import CommentSlider from '../components/Silder/commentSlider'
-import Sponsors from '../components/Footer/Sponsors'
+import Footer from '../components/Footer'
+import Head from 'next/head'
 
 import { useRouter } from 'next/router'
-
-import Footer from '../components/Footer'
 
 export default function Home( {commentsFeed} ) {
 
@@ -17,7 +16,10 @@ export default function Home( {commentsFeed} ) {
   
   return (
     <div className='min-h-screen h-fit flex flex-col'>
-      <Head/>
+      <Head>
+        <title> Foodies </title>
+      </Head>
+      <Header/>
       <Page>
         {/* Landing Section */}
         <Page.SingleWindow size="2xl"
@@ -37,25 +39,25 @@ export default function Home( {commentsFeed} ) {
                 <div className='bg-white p-8 rounded-full'>
                   <img className='w-[180px] h-[200px] object-contain' loading='lazy' src="/img/others/shop.svg" />
                 </div>
-                <div className='text-md text-green-700 mt-2 font-bold'> Pick your meals online </div>
+                <div className='text-[18px] text-green-700 mt-2 font-bold'> Pick your meals online </div>
               </div>
               <div className='h-full flex flex-col justify-center items-center'>
                 <div className='bg-white p-8 rounded-full'>
                   <img className='w-[180px] h-[200px] object-contain' loading='lazy' src="/img/others/cook.svg" />
                 </div>
-                <div className='text-md text-green-700 mt-2 font-bold'> Meals cooked by chef </div>
+                <div className='text-[18px] text-green-700 mt-2 font-bold'> Meals cooked by chef </div>
               </div>
               <div className='h-full flex flex-col justify-center items-center'>
                 <div className='bg-white p-8 rounded-full'>
                   <img className='w-[180px] h-[200px] object-contain' loading='lazy' src="/img/others/deliver.svg" />
                 </div>
-                <div className='text-md text-green-700 mt-2 font-bold'> Instant shipment to your address</div>
+                <div className='text-[18px] text-green-700 mt-2 font-bold'> Instant shipment to your address</div>
               </div>
               <div className='h-full flex flex-col justify-center items-center'>
                 <div className='bg-white p-8 rounded-full'>
                   <img className='w-[180px] h-[200px] object-contain' loading='lazy' src="/img/others/arrived.svg" />
                 </div>
-                <div className='text-md text-green-700 mt-2 font-bold'> Orders delivered </div>
+                <div className='text-[18px] text-green-700 mt-2 font-bold'> Orders delivered </div>
               </div>
 
             </div>
@@ -73,7 +75,7 @@ export default function Home( {commentsFeed} ) {
                     <div className='top-10 text-[18px] text-green-700/90 w-full md:3/5'>
                       We offer anywhere from 4–12 meals per week, with meals as low as $8.99 each.
                     </div>
-                    <NormalButton className='py-2 mt-5 text-[18px] w-[200px]' onClick={()=>router.push("/plans")}>
+                    <NormalButton className='justify-center py-2 mt-5 text-[18px] w-[200px]' onClick={()=>router.push("/plans")}>
                       See Details
                     </NormalButton>
                   </div>
@@ -104,7 +106,7 @@ export default function Home( {commentsFeed} ) {
             </div>
           }
           component2={
-            <NormalButton className='py-2 mt-5 text-[18px] w-[200px] mx-auto' onClick={()=>router.push("/menu")}>
+            <NormalButton className='justify-center  py-2 mt-5 text-[18px] w-[200px] mx-auto' onClick={()=>router.push("/menu")}>
               Shop Now
             </NormalButton>
           }

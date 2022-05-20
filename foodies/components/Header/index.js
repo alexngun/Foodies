@@ -2,7 +2,7 @@ import DiscountBar from './DiscountBar'
 import Navbar from './Navbar'
 import SideMenu from './SideMenu'
 
-function Head() {
+function Header() {
   return (
     <>
       <DiscountBar/>
@@ -12,4 +12,4 @@ function Head() {
   )
 }
 
-export default Head
+export default Header

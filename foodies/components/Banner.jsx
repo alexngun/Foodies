@@ -13,7 +13,7 @@ function Banner( {src, title, des, to, right, value="View", className=""}) {
             <div className={`pt-20 ${right?'pr-5':'pl-5'}`}>
                 <h1 className='text-[35px] text-green-700'> {title} </h1>
                 <div className='text-gray-700 text-[16px]'> {des} </div>
-                { to && <NormalButton onClick={()=>router(to)} className='w-[150px] mt-4 '>{value}</NormalButton>}
+                { to && <NormalButton onClick={()=>router(to)} className='justify-center py-1 w-[150px] mt-4 '>{value}</NormalButton>}
             </div>
         </div>
     </div>

@@ -8,28 +8,51 @@ import CheckoutButton from '../Buttons/CheckoutButton'
 import { IoMdSettings } from 'react-icons/io'
 import { BsBox } from 'react-icons/bs'
 import { ImEnter } from 'react-icons/im'
-
 import Link from '../Link'
-import { useDispatch, useSelector } from 'react-redux'
+
+import { signOut, useSession } from "next-auth/react"
 import { closeSideMenu } from '../../redux/sideMenuSlicer'
+import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
 function Navbar() {
 
-    const cart = useSelector(state=>state.cart)
+    const { data: session, status } = useSession()
+    const { push, asPath } = useRouter()
     const dispatch = useDispatch()
-    const cartLength = cart.length
+    const [cart, setCart] = useState(false);
+
+    //get cart items
+    useEffect(() => {
+        if ( typeof window != "undefined") {
+            var temp = window.localStorage.getItem("cart")
+            temp = temp ? JSON.parse(temp) : {}
+
+            var sum = 0;
+            Object.keys(temp).forEach( key => {
+                sum += temp[key].qty
+            })
+            setCart({data: temp, length: sum})
+        }
+    }, [])
+
+    const handleSignOut = async () => {
+        const data = await signOut( {redirect: false, callbackUrl: '/auth/signin' } )
+        push(data.url)
+    }
 
     const MiniCart = (
         <div className='-translate-y-[4px] w-screen py-5 bg-white sm:border-t-4 sm:border-t-green-700 flex flex-col items-center justify-center border sm:w-[300px] sm:rounded-b-lg'>
             <h2 className='text-green-700 font-bold'>Shopping Cart</h2>
-            { cartLength > 0 ? 
+            { cart.length  ? 
                 <ul className='w-full h-full px-5'>
-                    {cart.map( (product, i) => 
-                        <li key={`mini-cart-${i}`} className={`flex ${i==cartLength-1?"":"border-b-2"} py-4 hover:cursor-pointer`}>
-                            <Badge count={product.qty}>
-                                <Image objectFit='cover' className="rounded-lg" src={`/img/mealpic/${product.pic}`} width={80} height={70} alt={product.name}/>
+                    {Object.keys(cart.data).map( (key, i) => 
+                        <li key={`mini-cart-${i}`} className={`flex ${i==cart.length-1?"":"border-b-2"} py-4 hover:cursor-pointer`}>
+                            <Badge count={cart.data[key].qty}>
+                                <Image objectFit='cover' className="rounded-lg" src={`/img/mealpic/${cart.data[key].pic}.jpeg`} width={80} height={70} alt={cart.data[key].name}/>
                             </Badge>
-                            <span className='flex items-center w-[170px] ml-3 text-gray-500'> {product.name} </span>
+                            <span className='flex items-center w-[170px] ml-3 text-gray-500'> {cart.data[key].name} </span>
                         </li>
                     )}
                     <Link className="underline my-2 justify-center" to="/cart"> View Details </Link>
@@ -46,7 +69,7 @@ function Navbar() {
     );
 
     const UserMenu = (
-        <div className='-translate-y-[4px] w-screen text-lg bg-white sm:text-sm pt-2 sm:border-t-4 sm:border-t-green-700 flex flex-col items-center justify-center border sm:w-[200px] sm:rounded-b-lg'>
+        <div className='-translate-y-[4px] w-screen text-lg bg-white sm:text-sm pt-2 sm:border-t-4 sm:border-t-green-700 sm:w-[200px] flex flex-col items-center justify-center border sm:rounded-b-lg'>
             <ul className='w-full h-full px-5'>
                 <Link to="/account" className='border-b-[1px] my-1 py-1 text-green-700'>
                     <IoMdSettings/>
@@ -56,10 +79,22 @@ function Navbar() {
                     <BsBox/>
                     <span className='ml-2'> Orders </span>
                 </Link>
-                <Link to="/signin" className='flex items-center mt-1 pt-1 text-green-700'>
-                    <ImEnter/>
-                    <span className='ml-2'> Sign In </span>
-                </Link>
+                {
+                    status === "authenticated" ? 
+                        <div onClick={handleSignOut} className='flex items-center mt-1 pt-1 text-green-700 hover:cursor-pointer'>
+                            <ImEnter/>
+                            <div className='ml-2 flex flex-col flex-wrap' onClick={handleSignOut}>
+                                <span> Sign Out </span>
+                                <span className='text-sm'>({session.user.name})</span>
+                            </div> 
+                        </div> :
+                        <Link to={`/auth/signin?callbackUrl=${asPath}`} className='flex items-center mt-1 pt-1 text-green-700'>
+                            <ImEnter/>
+                            <div className='ml-2'> 
+                                Sign In
+                            </div> 
+                        </Link>
+                }
             </ul>
         </div>
     )
@@ -86,7 +121,7 @@ function Navbar() {
                     <Link className="justify-center" to='/help'>Help</Link>
                 </li>
             </ul>
-            <div className='flex space-x-3 h-full'>
+            <div className='flex space-x-3 h-full mr-2'>
 
                 <Dropdown overlay={UserMenu} trigger={['click']} placement="bottomRight">
                     <div onClick={()=>dispatch(closeSideMenu())} className="relative h-full hover:cursor-pointer flex items-center">
@@ -94,14 +129,17 @@ function Navbar() {
                     </div>
                 </Dropdown>
 
-                <Dropdown overlay={MiniCart} trigger={['click']} placement="bottomRight">
-                    <div onClick={()=>dispatch(closeSideMenu())} className="relative h-full hover:cursor-pointer flex items-center">
-                        <Badge count={cartLength} className="hover:cursor-pointer">
-                            <HiShoppingBag className='text-green-700 text-2xl'/>
-                        </Badge>
-                    </div>
-                </Dropdown>
-                
+                {
+                    cart && 
+                    <Dropdown overlay={MiniCart} trigger={['click']} placement="bottomRight">
+                        <div onClick={()=>dispatch(closeSideMenu())} className="relative h-full hover:cursor-pointer flex items-center">
+                            <Badge count={cart.length} overflowCount={10} className="hover:cursor-pointer">
+                                <HiShoppingBag className='text-green-700 text-2xl'/>
+                            </Badge>
+                        </div>
+                    </Dropdown>
+                }
+
             </div>
 
         </div>

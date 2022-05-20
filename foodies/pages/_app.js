@@ -7,12 +7,16 @@ import "swiper/css/pagination";
 
 import { Provider } from 'react-redux'
 import { store } from '../redux/store'
+import { SessionProvider } from 'next-auth/react'
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps} }) {
   return (
-    <Provider store = {store}>
-      <Component {...pageProps} />
-    </Provider>
+    <SessionProvider session={session}>
+        <Provider store = {store}>
+          <Component {...pageProps} />
+        </Provider>
+    </SessionProvider>
+
   )
 }
 

@@ -1,16 +1,17 @@
-import Head from "../../components/Head"
+import Header from "../../components/Header"
 import Page from '../../components/PageLayout'
 import Footer from '../../components/Footer'
 import { Select } from 'antd'
 import Product from "../../components/ProductDisplay/Product"
 import Image from "next/image"
-import Sponsors from "../../components/Footer/Sponsors"
-
-import { getMonth } from '../../utils/Date'
-import { useState } from "react"
+import Head from 'next/head'
 import Banner from "../../components/Banner"
 
+import { getMonth } from '../../utils/date'
+import { useState } from "react"
+
 const sortMenu = (menu, category) => {
+    
     menu = Object.entries(menu)[0][1]
     switch(category) {
         case "all":
@@ -34,7 +35,10 @@ function index( {menu} ) {
 
     return (
     <div>
-        <Head/>
+        <Head>
+            <title> Menu-Foodies </title>
+        </Head>
+        <Header/>
         <Page>
             <Page.SingleWindow size="sm" className=""
                 title={`On The Menu`}

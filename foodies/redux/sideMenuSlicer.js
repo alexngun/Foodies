@@ -4,7 +4,7 @@ export const sideMenuSlicer = createSlice({
     name: "sidemenu",
     initialState: false,
     reducers: {
-        toggleSideMenu: state=> !state,
+        toggleSideMenu: state=>!state,
         closeSideMenu: ()=>false
     }
 })

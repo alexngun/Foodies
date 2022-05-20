@@ -15,7 +15,7 @@ function BurgerMenuIcon({className}) {
     const dispatch = useDispatch()
 
   return (
-    <div className={`w-7 h-7 flex flex-col justify-evenly hover:cursor-pointer ${className}`} onClick={()=>dispatch(toggleSideMenu())}>
+    <div className={`w-7 h-7 mr-[34px] flex flex-col justify-evenly hover:cursor-pointer ${className}`} onClick={()=>dispatch(toggleSideMenu())}>
         <i className={`w-4/5 h-1 bg-green-700 rounded transition-all ${toggle?openStyle_1:closeStyle_1}`}/>
         <i className={`w-4/5 h-1 bg-green-700 rounded transition-all ${toggle?openStyle_2:closeStyle_2}`}/>
         <i className={`w-4/5 h-1 bg-green-700 rounded transition-all ${toggle?openStyle_3:closeStyle_3}`}/>
