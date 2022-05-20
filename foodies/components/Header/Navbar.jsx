@@ -15,6 +15,7 @@ import { closeSideMenu } from '../../redux/sideMenuSlicer'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { ConnectRemoteCart, ConnectLocalCart, calculateTotalItems } from '../../utils/fetchCart'
 
 function Navbar() {
 
@@ -22,20 +23,25 @@ function Navbar() {
     const { push, asPath } = useRouter()
     const dispatch = useDispatch()
     const [cart, setCart] = useState(false);
-
+    const [loading, setLoading] = useState(true);
+    
     //get cart items
     useEffect(() => {
-        if ( typeof window != "undefined") {
-            var temp = window.localStorage.getItem("cart")
-            temp = temp ? JSON.parse(temp) : {}
-
-            var sum = 0;
-            Object.keys(temp).forEach( key => {
-                sum += temp[key].qty
-            })
-            setCart({data: temp, length: sum})
-        }
+        ConnectRemoteCart("GET")
+        .then( res=>{
+            if(res.status === 401) {
+                ConnectLocalCart("GET")
+                .then( res=>{
+                    setCart(res)
+                    setLoading(false)
+                }).catch( err=>setLoading(false) )
+            } else {
+                setCart(res.list)
+                setLoading(false)
+            }
+        })
     }, [])
+    const length = calculateTotalItems(cart)
 
     const handleSignOut = async () => {
         const data = await signOut( {redirect: false, callbackUrl: '/auth/signin' } )
@@ -47,14 +53,17 @@ function Navbar() {
             <h2 className='text-green-700 font-bold'>Shopping Cart</h2>
             { cart.length  ? 
                 <ul className='w-full h-full px-5'>
-                    {Object.keys(cart.data).map( (key, i) => 
+                    {cart.map( (item, i) => 
                         <li key={`mini-cart-${i}`} 
-                            className={`flex ${i==Object.keys(cart.data).length-1?"":"border-b-2"} py-4 hover:cursor-pointer`}
+                            className={`flex ${i==cart.length-1?"":"border-b-2"} py-4 hover:cursor-pointer`}
+                            onClick={()=>push(`/menu/${item._id}`)}
                         >
-                            <Badge count={cart.data[key].qty}>
-                                <Image objectFit='cover' className="rounded-lg" src={`/img/mealpic/${cart.data[key].pic}.jpeg`} width={80} height={70} alt={cart.data[key].name}/>
+                            <Badge count={item.qty} overflowCount={10}>
+                                <Image objectFit='cover' className="rounded-lg" src={`/img/mealpic/${item.pic}.jpeg`}
+                                    width={80} height={70} alt={item.name}
+                                />
                             </Badge>
-                            <span className='flex items-center w-[170px] ml-3 text-gray-500'> {cart.data[key].name} </span>
+                            <span className='flex items-center w-[170px] ml-3 text-gray-500'> {item.name} </span>
                         </li>
                     )}
                     <Link className="underline my-2 justify-center" to="/cart"> View Details </Link>
@@ -132,14 +141,15 @@ function Navbar() {
                 </Dropdown>
 
                 {
-                    cart && 
-                    <Dropdown overlay={MiniCart} trigger={['click']} placement="bottomRight">
-                        <div onClick={()=>dispatch(closeSideMenu())} className="relative h-full hover:cursor-pointer flex items-center">
-                            <Badge count={cart.length} overflowCount={10} className="hover:cursor-pointer">
-                                <HiShoppingBag className='text-green-700 text-2xl'/>
-                            </Badge>
-                        </div>
-                    </Dropdown>
+                    loading ? <div className='relative h-full flex items-center'><HiShoppingBag className='text-gray-400 text-2xl'/></div> :
+                        cart && 
+                        <Dropdown destroyPopupOnHide overlay={MiniCart} trigger={['click']} placement="bottomRight">
+                            <div onClick={()=>dispatch(closeSideMenu())} className="relative h-full hover:cursor-pointer flex items-center">
+                                <Badge count={length} overflowCount={10} className="hover:cursor-pointer">
+                                    <HiShoppingBag className='text-green-700 text-2xl'/>
+                                </Badge>
+                            </div>
+                        </Dropdown>
                 }
 
             </div>

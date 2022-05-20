@@ -56,7 +56,7 @@ export default async function handler(req, res) {
                                 foreignField: "_id",
                                 as: "list"
                               }},
-                              {$project: {list: 1, _id: 0} }
+                              {$project: {cart: 1, list: 1, _id: 0} }
                             ]).toArray()
                       
       result ? res.status(200).send( result[0] ) : res.status(400).send( {error: "target not found"} )
