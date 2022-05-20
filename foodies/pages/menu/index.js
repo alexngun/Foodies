@@ -6,6 +6,7 @@ import Product from "../../components/ProductDisplay/Product"
 import Image from "next/image"
 import Head from 'next/head'
 import Banner from "../../components/Banner"
+import { motion, AnimatePresence } from 'framer-motion'
 
 import { getMonth } from '../../utils/date'
 import { useState } from "react"
@@ -61,13 +62,24 @@ function index( {menu} ) {
             <Page.GridWindow
                 gridStyle="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:space-x-7 mx-auto"
                 component={
-                    <>
+                    <AnimatePresence exitBeforeEnter>
                         {sortMenu(menu, category).map( (p, i) => { return (
-                            <div key={i} className="flex items-center justify-center">
+                            <motion.div
+                                className="flex items-center justify-center"
+                                key={p._id + i} 
+                                initial={{ x:50, opacity:0}}
+                                animate={{ x:0, opacity:1}}
+                                exit={{ x:-50, opacity:0}}
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 260,
+                                    damping: 20
+                                }}
+                            >
                                 <Product data={p}  />
-                            </div>
+                            </motion.div>
                         )})}
-                    </>
+                    </AnimatePresence>
                 }
             />
             <Page.SingleWindow size="md" className="mt-16 md:h-[450px] h-[600px] bg-cover bg-no-repeat bg-top md:bg-[url('/img/web/cook.jpeg')] bg-[url('/img/web/cook_sm.jpeg')]"

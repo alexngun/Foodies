@@ -51,7 +51,6 @@ function Navbar() {
                         <li key={`mini-cart-${i}`} 
                             className={`flex ${i==Object.keys(cart.data).length-1?"":"border-b-2"} py-4 hover:cursor-pointer`}
                         >
-                            { console.log(cart.length) }
                             <Badge count={cart.data[key].qty}>
                                 <Image objectFit='cover' className="rounded-lg" src={`/img/mealpic/${cart.data[key].pic}.jpeg`} width={80} height={70} alt={cart.data[key].name}/>
                             </Badge>
