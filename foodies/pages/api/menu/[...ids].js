@@ -9,14 +9,12 @@ export default async function handler(req, res) {
 
   switch (req.method) {
     case "GET":
-        const posts = validateObjectId(req.query.id) ?
-                      //if objectid is valid, fetch from database
-                      await db.collection("meal").findOne({_id: ObjectId(req.query.id) }) :  
-                      //else return 400 with invalid id    
-                      res.status(400).send( {error: "invalid object id"} )
+        const posts = await db.collection("meal").find(
+            {_id: { $in : req.query.ids.map(id=>ObjectId(id))} }
+        ).toArray()
 
         // return not found error or target data
-        posts ? res.status(200).send( { data: posts } ) : res.status(400).send( {error: "target not found"} )
+        posts ? res.status(200).send( posts ) : res.status(400).send( {error: "target not found"} )
         break
     default:
         res.status(400).send({error: `${req.method} method not allowed at the moment`})
