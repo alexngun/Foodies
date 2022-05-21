@@ -6,6 +6,12 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Page from '../components/PageLayout'
 import Loading from '../components/LoadingPage'
+
+const handleAddToCart = async item => {
+    const result = await ConnectRemoteCart("POST", item)
+    console.log(result)
+    return result
+}
  
 function cart() {
 
@@ -31,7 +37,7 @@ function cart() {
     return (
         <div>
             <Header/>
-            <Page>
+            {/* <Page>
                 { loading ? 
                     <Page.SingleWindow className="mt-4"
                         title="Cart"
@@ -43,7 +49,8 @@ function cart() {
                         {cart.map(item=><div key={item._id}>{item.name}</div>)}
                     </div>
                 }
-            </Page>
+            </Page> */}
+            <div onClick={()=>handleAddToCart({id: '6271c4ec25462e0987a844a3', qty: 2})}>Click Me</div>
             <Footer/>
         </div>
     )

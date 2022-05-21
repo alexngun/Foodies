@@ -12,6 +12,7 @@ import { IoIosArrowForward } from 'react-icons/io'
 
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 
 const colors = [
     'magenta',
@@ -29,12 +30,11 @@ const colors = [
 function Details( {data} ) {
 
     const [quantity, setQuantity] = useState(1);
-    
-
-    const handleChange = value => setQuantity(value)
-
     const [isModalVisible, setIsModalVisible] = useState(false);
     const router = useRouter()
+    const { data: session, status } = useSession()
+
+    const handleChange = value => setQuantity(value)
 
     const handleAddToCart = () => {
         const id = data._id

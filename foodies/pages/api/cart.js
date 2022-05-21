@@ -17,14 +17,18 @@ export default async function handler(req, res) {
 
   switch (req.method) {
     case "POST":
-      const postResult = validateObjectId(session.userid) ?
-                      await db.collection("users").updateOne(
-                        {_id: ObjectId(session.userid)},
-                        {$push: { cart : 
-                          { itemID: ObjectId(req.body.id), qty:req.body.qty} 
-                        }}
-                      ) :
-                      res.status(400).send( {error: "invalid object id"} )
+      const postResult = await db.collection("users").updateOne(
+                          {_id: ObjectId(session.userid), "cart.itemID": {$not: {$eq: ObjectId(req.body.id)}}},
+                          {$push: { cart : 
+                            { itemID: ObjectId(req.body.id), qty:req.body.qty} 
+                          }}
+                        )
+      if(postResult.modifiedCount == 0) {
+        await db.collection("users").updateOne(
+          {_id: ObjectId(session.userid), "cart.itemID": ObjectId(req.body.id)},
+          {$inc: {'cart.$.qty': req.body.qty} }
+        )
+      }
       res.status(200).send({status: 200, res: postResult})
       break
     case "DELETE":
