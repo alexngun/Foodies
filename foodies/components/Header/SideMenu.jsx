@@ -1,5 +1,6 @@
 import Link from "../Link"
 import { MdKeyboardArrowRight } from 'react-icons/md'
+
 import { useSelector } from "react-redux"
 import { useState, useEffect } from "react";
 
@@ -18,7 +19,7 @@ function SideMenu() {
         if ( typeof window != "undefined") {
             setMount(calculateScrollOffset())
         }
-    }, [])
+    })
 
     if (typeof window != "undefined" ) {
         sideMenu ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'scroll'

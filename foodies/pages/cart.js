@@ -40,7 +40,7 @@ function cart() {
                         component={<Loading className='-translate-y-16'/>}
                     />:
                     <div>
-                        {cart.map(item=><div>{item.name}</div>)}
+                        {cart.map(item=><div key={item._id}>{item.name}</div>)}
                     </div>
                 }
             </Page>
