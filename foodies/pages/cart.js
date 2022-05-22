@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setCart } from '../redux/cartSlicer'
 import { Empty } from 'antd'
 import NormalButton from '../components/Buttons/NormalButton'
+import Banner from '../components/Banner'
 
  
 function cart() {
@@ -62,6 +63,7 @@ function cart() {
                                     <div className='w-full lg:px-16 my-4'>
                                         { disableCheckout ? 
                                             <NormalButton className='py-2 flex justify-center w-full'
+                                                onClick={()=>push("/auth/signin?callbackUrl=/cart")}
                                                 bgColor='bg-gray-400'
                                             >
                                                 Please Log In Before Checkout
@@ -90,6 +92,7 @@ function cart() {
                                     { disableCheckout ? 
                                             <NormalButton className='lg:mr-16 mt-5 py-2 flex justify-center w-1/3 min-w-[300px]'
                                                 bgColor='bg-gray-400'
+                                                onClick={()=>push("/auth/signin?callbackUrl=/cart")}
                                             >
                                                 Please Log In Before Checkout
                                             </NormalButton> : 

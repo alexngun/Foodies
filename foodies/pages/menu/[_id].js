@@ -48,7 +48,7 @@ function Details( {data} ) {
                         }
                     })
 
-        router.push("/menu")
+        router.push(`/menu?add=success&item=${data.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}&qty=${quantity}`)
 
     }
 
