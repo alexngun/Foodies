@@ -73,10 +73,10 @@ function ProductCart( {item, className=""} ) {
             }
         </div>
         <div className='flex flex-col lg:justify-start justify-between mt-2'>
-            <div className='text-green-700 font-bold text-xl'>CAD{(item.price * item.qty).toFixed(2)}</div>
-            <div className='flex flex-col h-[40px] justify-center'>
+            <div className='text-green-700 font-bold text-xl'>CAD${(item.price * item.qty).toFixed(2)}</div>
+            <div className='flex flex-col h-[40px] justify-center w-[160px]'>
                 { qtyLoading ? 
-                    <div className='flex justify-center'> <Spin/> </div> : 
+                    <div className='flex justify-center w-full'> <Spin/> </div> : 
                     <QtySelector enableMore={false} initial={item.qty} onChange={(v)=>handleChange(v)}/> 
                 }
             </div>

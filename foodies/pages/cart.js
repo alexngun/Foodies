@@ -75,7 +75,7 @@ function cart() {
                                     {cart.map(item=>
                                         <ProductCart key={item._id} item={item}/>
                                     )}
-                                    <div className='lg:mr-16 flex justify-between min-w-[300px] text-lg w-1/3 pb-5 border-b-[1px] border-b-gray-300'>
+                                    <div className='lg:mr-16 flex justify-between min-w-[300px] text-lg w-full lg:w-1/3 pb-5 border-b-[1px] border-b-gray-300'>
                                         <div>
                                             <div> Subtotal:</div>
                                             <div> Delivery:</div>
@@ -100,7 +100,7 @@ function cart() {
                                     }
                                     
                                 </> :
-                                <div className='w-full sm:h-[650px] h-[400px]  p-10 flex items-center justify-center'>
+                                <div className='w-full sm:h-[650px] h-[400px] p-10 flex items-center justify-center'>
                                     <Empty className='p-10' description={
                                         <span className='text-xl font-bold text-green-700'> 
                                             Your cart is empty 
