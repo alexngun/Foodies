@@ -21,11 +21,11 @@ function SingleWindow({className, size, component, title, des, center, titleColo
             sizeStyle = "550px"
             break;
         default:
-            sizeStyle = "350px" 
+            sizeStyle = "" 
     }
 
     return (
-        <section className={`${className?className:""} flex flex-col w-full min-h-[${sizeStyle}] px-4 lg:h-[${sizeStyle}] h-fit`}>
+        <section className={`${className?className:""} flex flex-col w-full min-h-[${sizeStyle}] px-4 ${size?`lg:h-[${sizeStyle}]`:""}  h-fit`}>
             {title && <h1 className={`text-[30px] ${titleColor} ${center ? "text-center" : "text-left"} my-0`}>{title}</h1>}
             {des && <div className={`text-lg mt-3 ${titleColor}/70 ${center ? "text-center" : "text-left"}`}>{des}</div>}
             {component}

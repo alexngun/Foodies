@@ -4,6 +4,7 @@ import FacebookProvider from 'next-auth/providers/facebook'
 import GitHubProvider from "next-auth/providers/github";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import clientPromise from "../../../utils/mongodb"
+import { signIn } from 'next-auth/react';
 // import CredentialsProvider from "next-auth/providers/credentials"
 
 export default NextAuth({
@@ -40,6 +41,6 @@ export default NextAuth({
         async session({ session, user, token }) {
             session.userid = user.id
             return session
-          },
+        },
     }
 })

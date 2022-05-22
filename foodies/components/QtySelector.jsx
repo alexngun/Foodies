@@ -2,16 +2,17 @@ import { InputNumber } from 'antd'
 import { useState, useEffect } from 'react'
 import { AiOutlinePlusSquare, AiOutlineMinusSquare} from 'react-icons/ai'
 
-function QtySelector( {onChange, className=""} ) {
+function QtySelector( {initial, onChange, enableMore=true, className=""} ) {
 
     const [ more, setMore ] = useState(false)
-    const [num, setNum] = useState(1)
+    const [ num, setNum ] = useState(initial)
 
     useEffect(() => {
-      if(num >= 10)
-        setMore(true)
+        if(num >= 10)
+            setMore(true)
 
-      onChange(num)
+        if( num !== initial) 
+            onChange(num)
     }, [num])
     
 
@@ -23,9 +24,9 @@ function QtySelector( {onChange, className=""} ) {
         <div className={`flex items-center space-x-2 mr-5 ${className}`}>
             <label className='text-[16px] text-green-700'> Quantity </label>
             {
-                more ? 
+                more && enableMore ? 
                     <InputNumber 
-                        min={1} max={999} defaultValue={10} onChange={callbackValue}    
+                        min={1} max={999} defaultValue={initial} onChange={callbackValue}    
                     /> :
                     <div className='flex items-center space-x-1'>
                         <AiOutlineMinusSquare 

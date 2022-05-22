@@ -28,30 +28,50 @@ export const ConnectRemoteCart = async (method, payload) => {
     return post
 }
 
-export const ConnectLocalCart = async (method, payload) => {
+export const ConnectLocalCart = async () => {
+
     let items = typeof window != "undefined" && window.localStorage.getItem("cart")
     items = JSON.parse(items)
     var params = ""
-    Object.keys(items).forEach( key=> {
-        params += `${key}/` 
-    })
 
-    const res = await fetch(`http://localhost:3000/api/menu/${params}`, {
-                        method: "GET",
-                        mode: 'cors',
-                        cache: 'no-cache',
-                        credentials: 'same-origin',
-                        headers: { 'Content-Type': 'application/json'},
-                        redirect: 'follow',
-                        referrerPolicy: 'no-referrer',
-                      })
-    const post = await res.json()
+    if(items) {
+        Object.keys(items).forEach( key=> {
+            params += `${key}/` 
+        })
+    
+        if(params!=="") {
+            const res = await fetch(`http://localhost:3000/api/menu/${params}`, {
+                method: "GET",
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: { 'Content-Type': 'application/json'},
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+              })
+            const post = await res.json()
+    
+            if(post.data) {
+                Object.keys(items).forEach( (key, i) => {
+                    post.data.qty = items[key].qty
+                })
+                var result = post.data
+                return [ result ]
+            } else {
+                Object.keys(items).forEach( (key) => {
+                    for(var j = 0; j < post.length; j++)
+                        if(post[j]._id === key)
+                            post[j].qty = items[key].qty
+                })
+                return post
+            }
+        }
+     
+    }
 
-    Object.keys(items).forEach( (key, i) => {
-        post[i].qty = items[key].qty
-    })
+    return []
 
-    return post
+    
 }
 
 export const calculateTotalItems = items => {
@@ -61,6 +81,18 @@ export const calculateTotalItems = items => {
             sum+=item.qty
         })
         return sum
+    } catch {
+        return 0
+    }
+}
+
+export const calculateSubTotal = items => {
+    try {
+        var subtotal = 0
+        items.forEach( item => {
+            subtotal += (item.qty * item.price)
+        })
+        return subtotal
     } catch {
         return 0
     }

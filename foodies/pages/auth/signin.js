@@ -18,12 +18,35 @@ function Signin() {
   useEffect(() => {
     query.error && setShowError(true)
   }, [status])
+
+  useEffect(()=> {
+    if(query.pushCart && status !== "loading") {
+      const cart = window.localStorage.getItem("cart")
+      if(cart) {
+        fetch("http://localhost:3000/api/pushToCart/", {
+          method: "POST",
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json'},
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer',
+          body: JSON.stringify(cart)
+        })
+      }
+      window.localStorage.setItem("cart", "{}")
+    }
+  }, [status])
+
+  const handleLogin = async provider => {
+    await signIn(provider, { callbackUrl: "/auth/signin?pushCart=true"} )
+  }
   
   if( status === 'loading') return (<LoadingPage/>)
-  
+
   if (session) {
     setTimeout( () => {
-      push('/')
+      push(`${query.callbackUrl?query.callbackUrl:"/"}`)
     }, 3000)
 
     return (
@@ -71,17 +94,17 @@ function Signin() {
       <h1 className='text-[25px] font-bold text-green-700'> Welcome Back </h1>
       <ul className='space-y-4 mt-6'>
         <li className='flex items-center p-5 hover:cursor-pointer border-2 border-google text-google' 
-            onClick={()=>signIn('google')}
+            onClick={()=>handleLogin('google')}
           > 
           <AiOutlineGoogle className='text-2xl mr-2 '/> Sign in with Google 
         </li>
         <li className='flex items-center p-5 hover:cursor-pointer border-2 border-facebook text-facebook' 
-            onClick={()=>signIn('facebook')}
+            onClick={()=>handleLogin('facebook')}
           > 
           <AiOutlineFacebook className='text-2xl mr-2 '/> Sign in with Facebook
         </li>
         <li className='flex items-center p-5 hover:cursor-pointer border-2 border-github text-github'
-            onClick={()=>signIn('github')}
+            onClick={()=>handleLogin('github')}
           >
            <AiOutlineGithub className='text-2xl mr-2'/> Sign in with Github 
         </li>

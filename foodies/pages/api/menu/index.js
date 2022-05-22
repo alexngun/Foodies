@@ -6,8 +6,6 @@ export default async function handler(req, res) {
   const db = client.db("test")
 
   switch (req.method) {
-    case "POST":
-      res.status(400).send("post method not allowed at the moment")
     case "GET":
       const posts = await db.collection("meal")
                             .find({})
@@ -15,6 +13,9 @@ export default async function handler(req, res) {
                             .toArray();
       res.status(200).send( { data: posts } );
       break;
+    default:
+      res.status(400).send( {status: 400, error: `${req.method} are not allowed at the moment`})
+      break
   }
 
 }

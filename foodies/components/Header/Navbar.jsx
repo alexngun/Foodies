@@ -14,15 +14,16 @@ import { signOut, useSession } from "next-auth/react"
 import { closeSideMenu } from '../../redux/sideMenuSlicer'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ConnectRemoteCart, ConnectLocalCart, calculateTotalItems } from '../../utils/fetchCart'
+import { setCart } from '../../redux/cartSlicer'
 
 function Navbar() {
 
     const { data: session, status } = useSession()
     const { push, asPath } = useRouter()
     const dispatch = useDispatch()
-    const [cart, setCart] = useState(false);
+    const cart = useSelector(state=>state.cart)
     const [loading, setLoading] = useState(true);
     
     //get cart items
@@ -30,17 +31,18 @@ function Navbar() {
         ConnectRemoteCart("GET")
         .then( res=>{
             if(res.status === 401) {
-                ConnectLocalCart("GET")
+                ConnectLocalCart()
                 .then( res=>{
-                    setCart(res)
+                    dispatch(setCart(res))
                     setLoading(false)
-                }).catch( err=>setLoading(false) )
+                })
             } else {
-                setCart(res.list)
+                dispatch(setCart(res.list))
                 setLoading(false)
             }
         })
     }, [])
+    
     const length = calculateTotalItems(cart)
 
     const handleSignOut = async () => {
@@ -53,7 +55,7 @@ function Navbar() {
             <h2 className='text-green-700 font-bold'>Shopping Cart</h2>
             { cart.length  ? 
                 <ul className='w-full h-full px-5'>
-                    {cart.map( (item, i) => 
+                    {cart.slice(0,5).map( (item, i) => 
                         <li key={`mini-cart-${i}`} 
                             className={`flex ${i==cart.length-1?"":"border-b-2"} py-4 hover:cursor-pointer`}
                             onClick={()=>push(`/menu/${item._id}`)}
@@ -145,7 +147,7 @@ function Navbar() {
                         cart && 
                         <Dropdown destroyPopupOnHide overlay={MiniCart} trigger={['click']} placement="bottomRight">
                             <div onClick={()=>dispatch(closeSideMenu())} className="relative h-full hover:cursor-pointer flex items-center">
-                                <Badge count={length} overflowCount={10} className="hover:cursor-pointer">
+                                <Badge count={length} overflowCount={99} className="hover:cursor-pointer">
                                     <HiShoppingBag className='text-green-700 text-2xl'/>
                                 </Badge>
                             </div>

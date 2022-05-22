@@ -12,43 +12,44 @@ import { IoIosArrowForward } from 'react-icons/io'
 
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/react'
+import { ConnectRemoteCart } from '../../utils/fetchCart'
 
-const colors = [
-    'magenta',
-    'red',
-    'volcano',
-    'orange',
-    'gold',
-    'green',
-    'cyan',
-    'blue',
-    'geekblue',
-    'purple'
-]
+const colors = {
+    "High Protein":'magenta',
+    "Spicy": 'red',
+    "Gluten Free": 'gold',
+    "Vegetarian": 'green',
+    "Soy Free":'cyan',
+    "Dairy Free": 'geekblue',
+}
+
 
 function Details( {data} ) {
 
     const [quantity, setQuantity] = useState(1);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const router = useRouter()
-    const { data: session, status } = useSession()
 
     const handleChange = value => setQuantity(value)
 
-    const handleAddToCart = () => {
-        const id = data._id
-        const name = data.name
-        const price = data.price
-        const pic = data.pic
+    const handleAddToCart = async () => {
 
-        var cart = JSON.parse(window.localStorage.getItem("cart"))
-        if(cart)
-            cart[id] = cart[id] ? { name, price, pic, qty: cart[id].qty + quantity } : { name, price, pic, qty: quantity }
-        else
-            cart = { [id]: { name, price, pic, qty: quantity } }
-        window.localStorage.setItem("cart", JSON.stringify(cart))
+        const id = data._id
+        
+            await ConnectRemoteCart("POST", {id:id, qty: quantity})
+                    .then( res=> {
+                        if( res.status === 401) {
+                            var cart = JSON.parse(window.localStorage.getItem("cart"))
+                            if(cart)
+                                cart[id] = cart[id] ? { qty: cart[id].qty + quantity } : { qty: quantity }
+                            else
+                                cart = { [id]: { qty: quantity } }
+                            window.localStorage.setItem("cart", JSON.stringify(cart))
+                        }
+                    })
+
         router.push("/menu")
+
     }
 
     return (
@@ -70,10 +71,11 @@ function Details( {data} ) {
                     <div className='hidden lg:block text-[18px] text-gray-500 italic'>{data.subtitle}</div>
                     <p className='w-[85%] lg:mt-6 text-gray-500 text-center mb-6 lg:text-left'> {data.des} </p>
                     <div className='flex space-x-2 lg:w-full w-fit mb-6'>
-                        { data.tags.map( (tag, index) => <Tag color={colors[index]} key={index}>{tag}</Tag>) }
+                        { data.tags.map( (tag, index) => <Tag color={colors[tag]} key={index}>{tag}</Tag>) }
                     </div>
+                    <div className='text-sky-700 lg:text-xl lg:mb-0 font-bold text-2xl mb-6'> CAD{data.price} / serving </div>
                     <div className='lg:flex-row flex flex-col h-[120px] w-3/5 items-center justify-between pb-6'>
-                        <QtySelector onChange={handleChange} className="lg:scale-100 scale-[130%]"/>
+                        <QtySelector initial={1} onChange={handleChange} className="lg:scale-100 scale-[130%]"/>
                         <NormalButton onClick={handleAddToCart} className='justify-center px-4 py-3 lg:py-2 text-sm font-bold w-full lg:w-fit'> 
                             <BsCartPlus className='mr-1 -translate-y-[2px]'/> Add To Cart 
                         </NormalButton>

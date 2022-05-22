@@ -1,7 +1,7 @@
 
-function NormalButton({children, className="", onClick}) {
+function NormalButton({children, className="", onClick, bgColor="bg-green-700"}) {
   return (
-    <button className={`${className} flex items-center hover:cursor-pointer hover:opacity-90 bg-green-700 text-lg rounded-md text-white`}
+    <button className={`flex items-center hover:cursor-pointer hover:opacity-90 ${bgColor} text-lg rounded-md text-white ${className}`}
         onClick={onClick}
     >
         {children}
