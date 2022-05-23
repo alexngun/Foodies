@@ -22,7 +22,7 @@ import { setCart } from '../../redux/cartSlicer'
 function Navbar() {
 
     const { data: session, status } = useSession()
-    const { push, asPath } = useRouter()
+    const { push, pathname, replace } = useRouter()
     const dispatch = useDispatch()
     const cart = useSelector(state=>state.cart)
     const [loading, setLoading] = useState(true);
@@ -47,6 +47,11 @@ function Navbar() {
     }, [])
     
     const length = calculateTotalItems(cart)
+
+    const handleSignIn = async () => {
+        await replace(pathname, undefined, {shallow: true})
+        push('/auth/signin')
+    }
 
     const handleSignOut = async () => {
         const data = await signOut( {redirect: false, callbackUrl: '/auth/signin' } )
@@ -113,12 +118,12 @@ function Navbar() {
                                 <span className='text-sm'>({session.user.name})</span>
                             </div> 
                         </div> :
-                        <Link to={`/auth/signin?callbackUrl=${asPath}`} className='flex items-center mt-1 pt-1 text-green-700'>
+                        <div onClick={handleSignIn} className='hover:cursor-pointer flex items-center mt-1 pt-1 text-green-700'>
                             <ImEnter/>
                             <div className='ml-2'> 
                                 Sign In
                             </div> 
-                        </Link>
+                        </div>
                 }
             </ul>
         </div>

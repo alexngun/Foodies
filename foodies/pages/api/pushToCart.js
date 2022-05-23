@@ -25,7 +25,6 @@ export default async function handler(req, res) {
         if( posts.cart ) {
             cart = posts.cart
             const length = cart.length
-
             if( length > 0 ) 
                 Object.keys(body).forEach( key=> {
                     var isAppended = true
@@ -38,11 +37,11 @@ export default async function handler(req, res) {
                     }
  
                     if(isAppended)
-                        cart.push({itemID: ObjectId(key), qty: body[key].qty})
+                        cart.push( {itemID: ObjectId(key), qty: body[key].qty} )
                 })
             else
-                Object.keys(req.bod).forEach( key=> {
-                    cart = [...cart, {itemID: ObjectId(key), qty: body[key].qty}]
+                Object.keys(body).forEach( key=> {
+                    cart.push( {itemID: ObjectId(key), qty: body[key].qty} )
                 })
 
 
