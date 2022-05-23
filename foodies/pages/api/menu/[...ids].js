@@ -1,6 +1,5 @@
 import clientPromise from "../../../utils/mongodb";
 import { ObjectId } from "mongodb";
-import validateObjectId from "../../../utils/validateId";
 
 export default async function handler(req, res) {
 

@@ -12,8 +12,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setCart } from '../redux/cartSlicer'
 import { Empty } from 'antd'
 import NormalButton from '../components/Buttons/NormalButton'
-import Banner from '../components/Banner'
-
  
 function cart() {
 
@@ -54,7 +52,7 @@ function cart() {
                 <Page.SingleWindow className="mt-4"
                     component={ loading ? 
                         <Loading className='-translate-y-16'/> :
-                        <div className='my-2 flex flex-col justify-center w-full h-fit items-end lg:px-16'>
+                        <div className='my-2 flex flex-col justify-center w-full h-fit items-end lg:px-10'>
                             {
                                 cart.length > 0 ? 
                                 <>

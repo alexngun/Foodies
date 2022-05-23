@@ -13,16 +13,37 @@ function Signin() {
 
   const { data:session, status } = useSession()
   const { push, query } = useRouter()
-  const [showError, setShowError] = useState(false);
+  const [message, setMessage] = useState(false)
   
   useEffect(() => {
-    query.error && setShowError(true)
-  }, [status])
+    if(query.error) {
+      if(query.error === "OAuthAccountNotLinked") {
+        setMessage({
+            status: "error",
+            title: "Sign in fail",
+            des: "Account with the same email address is already registered! Please login to your original account."
+        })
+      }
+      else if(query.error === "AuthRequired") {
+        setMessage({
+          status: "warning",
+          title: "Login required",
+          des: "Please log in first"
+        })
+      }
+      else {
+        setMessage({
+          status: "error",
+          title: "Sign in fail",
+          des: "An error occured during login. Please try again"
+        })
+      }
+    }
 
-  useEffect(()=> {
     if(query.pushCart && status !== "loading") {
       const cart = window.localStorage.getItem("cart")
-      if(cart) {
+      
+      if(cart && Object.keys(cart).length > 2) {
         fetch("http://localhost:3000/api/pushToCart/", {
           method: "POST",
           mode: 'cors',
@@ -38,8 +59,9 @@ function Signin() {
     }
   }, [status])
 
+
   const handleLogin = async provider => {
-    await signIn(provider, { callbackUrl: "/auth/signin?pushCart=true"} )
+    await signIn(provider, { callbackUrl: `/auth/signin?pushCart=true${query.callbackUrl?`&callbackUrl=${query.callbackUrl}`:""}`} )
   }
   
   if( status === 'loading') return (<LoadingPage/>)
@@ -51,7 +73,7 @@ function Signin() {
 
     return (
       <div className='w-screen h-screen flex flex-col items-center'>
-        <Brand size="lg" className="mt-[10%] opacity-90 translate-y-20"/>
+        <Brand size="lg" className="opacity-90 translate-y-20"/>
         <Result
           status="success"
           title="Login successfully"
@@ -65,12 +87,12 @@ function Signin() {
     )
   }
 
-  setTimeout( ()=> showError && setShowError(false), 5000 )
+  setTimeout( ()=> message && setMessage(false), 5000 )
 
   return (
     <div className='w-screen h-screen flex flex-col items-center'>
       <AnimatePresence>
-        { showError &&         
+        { message &&         
             <motion.span
               initial = { { y: -100} }
               animate ={ { y: 0} }
@@ -78,11 +100,9 @@ function Signin() {
               transition = {{type: "spring", stiffness: 250, damping: 20 }}
               className='z-10 fixed top-[10px] mx-auto shadow-lg'>
                   <Alert
-                    message="Sign in failed"
-                    description={` ${query.error==="OAuthAccountNotLinked"?
-                      "Account with the same email address is already registered! Please login to your original account.":
-                      "An error occured during login. Please try again"}`}
-                    type="error"
+                    message={message.title}
+                    description={message.des}
+                    type={message.status}
                     showIcon
                   />
             </motion.span>

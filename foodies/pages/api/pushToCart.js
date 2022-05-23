@@ -22,7 +22,7 @@ export default async function handler(req, res) {
         var cart = []
         const body = JSON.parse(req.body)
 
-        if( posts.cart) {
+        if( posts.cart ) {
             cart = posts.cart
             const length = cart.length
 

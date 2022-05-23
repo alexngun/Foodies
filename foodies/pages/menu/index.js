@@ -36,17 +36,19 @@ function index( {menu} ) {
 
     let month = getMonth("string")
     const [category, setCategory] = useState("all");
-    const { query, replace } = useRouter()
+    const { query } = useRouter()
     const [showSuccess, setshowSuccess] = useState(false);
     const cart = useSelector(state=>state.cart)
     
     useEffect(() => {
-        query.add && setshowSuccess(true)
+        query.add && setshowSuccess({
+            item: query.item,
+            qty: query.qty
+        })
     }, [cart])
     
     setTimeout( ()=> {
         showSuccess && setshowSuccess(false)
-        showSuccess && replace('/menu', undefined, {shallow: true})
     }, 5000 )
 
     return (
@@ -65,7 +67,7 @@ function index( {menu} ) {
                     className='z-10 fixed top-[10px] mx-auto shadow-lg flex justify-center'>
                         <Alert
                             message="Item(s) added to cart"
-                            description={`${query.item} (${query.qty}) ${query.qty>1?'are':'is'} successfully added to your cart`}
+                            description={`${showSuccess.item} (${showSuccess.qty}) ${showSuccess.qty>1?'are':'is'} successfully added to your cart`}
                             type="success"
                             showIcon
                             closable

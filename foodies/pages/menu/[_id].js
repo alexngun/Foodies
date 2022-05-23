@@ -14,16 +14,6 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { ConnectRemoteCart } from '../../utils/fetchCart'
 
-const colors = {
-    "High Protein":'magenta',
-    "Spicy": 'red',
-    "Gluten Free": 'gold',
-    "Vegetarian": 'green',
-    "Soy Free":'cyan',
-    "Dairy Free": 'geekblue',
-}
-
-
 function Details( {data} ) {
 
     const [quantity, setQuantity] = useState(1);
@@ -71,7 +61,7 @@ function Details( {data} ) {
                     <div className='hidden lg:block text-[18px] text-gray-500 italic'>{data.subtitle}</div>
                     <p className='w-[85%] lg:mt-6 text-gray-500 text-center mb-6 lg:text-left'> {data.des} </p>
                     <div className='flex space-x-2 lg:w-full w-fit mb-6'>
-                        { data.tags.map( (tag, index) => <Tag color={colors[tag]} key={index}>{tag}</Tag>) }
+                        { data.tags.map( (tag, index) => <Tag color="green" key={index}>{tag}</Tag>) }
                     </div>
                     <div className='text-sky-700 lg:text-xl lg:mb-0 font-bold text-2xl mb-6'> CAD{data.price} / serving </div>
                     <div className='lg:flex-row flex flex-col h-[120px] w-3/5 items-center justify-between pb-6'>

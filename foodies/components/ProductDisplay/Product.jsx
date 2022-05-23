@@ -3,10 +3,15 @@ import { useRouter } from 'next/router'
 
 function Product( {className="", data} ) {
 
-    const router = useRouter()
+  const router = useRouter()
+
+  const handleClick = async () => {
+    await router.replace('/menu', undefined, {shallow: true})
+    router.push(`/menu/${data._id}`)
+  }
 
   return (
-    <div className={`${className} flex flex-col w-fit h-fit py-5 hover:cursor-pointer`} onClick={()=>router.push(`/menu/${data._id}`)}>
+    <div className={`${className} flex flex-col w-fit h-fit py-5 hover:cursor-pointer`} onClick={handleClick}>
         <div className="relative h-[220px] w-[320px] rounded-lg overflow-hidden"  >
             <Image quality={10} className="hover:scale-110 transition-transform" objectFit="cover" layout='fill' src={`/img/mealpic/${data.pic}.jpeg`}/>
         </div>

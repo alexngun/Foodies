@@ -9,15 +9,6 @@ import { ConnectRemoteCart } from '../../utils/fetchCart'
 import { deleteItem, modifyCart } from '../../redux/cartSlicer'
 import { useState } from 'react'
 
-const colors = {
-    "High Protein":'magenta',
-    "Spicy": 'red',
-    "Gluten Free": 'gold',
-    "Vegetarian": 'green',
-    "Soy Free":'cyan',
-    "Dairy Free": 'geekblue',
-}
-
 function ProductCart( {item, className=""} ) {
 
     const { push } = useRouter()
@@ -54,7 +45,7 @@ function ProductCart( {item, className=""} ) {
     }
 
     return (
-    <div className={`border-b-[1px] border-b-gray-300 mb-10 justify-center flex flex-col lg:flex-row lg:h-[300px] h-fit py-5 lg:px-2 w-full ${className}`}>
+    <div className={`border-b-[1px] border-b-gray-300 mb-10 pb-16 justify-center flex flex-col lg:flex-row lg:h-[300px] h-fit py-5 lg:px-2 w-full ${className}`}>
         <div onClick={()=>push(`/menu/${item._id}`)} 
             className='hover:cursor-pointer grow-0 relative pl-16 lg:w-[300px] w-full lg:h-full h-[300px]'
             >
@@ -64,7 +55,7 @@ function ProductCart( {item, className=""} ) {
             <div className='text-[22px] text-green-700'>{item.name}</div>
             <div className='text-[16px] text-gray-500 italic'>{item.subtitle}</div>
             <div className='flex lg:w-full w-fit mt-2'>
-                { item.tags.map( (tag, index) => <Tag color={colors[tag]} key={index}>{tag}</Tag>) }
+                { item.tags.map( (tag, index) => <Tag color="green" key={index}>{tag}</Tag>) }
             </div>
             <p className='sm:w-[400px] w-full mt-2'> {truncateText(item.des, 200)} </p>
             { deleteLoading ? 
