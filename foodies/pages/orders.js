@@ -38,7 +38,7 @@ const OrderItems = ( {items} ) => {
                             <Pagination onChange={handleChangePage} defaultCurrent={1} pageSize={itemsPerPage} total={items.data.length}/>
                         </> :
                         <div className='flex flex-col items-center justify-center h-[400px]'>
-                            <Empty description={<span>You do not have any order history.</span>}>
+                            <Empty description={<span>You have not placed any orders yet.</span>}>
                                 <span className='text-gray-400'> If you believe there is some mistake on your order history, please contact us (123)456-7890.</span>
                             </Empty>
                         </div>

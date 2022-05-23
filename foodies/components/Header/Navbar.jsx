@@ -9,6 +9,7 @@ import { IoMdSettings } from 'react-icons/io'
 import { BsBox } from 'react-icons/bs'
 import { ImEnter } from 'react-icons/im'
 import Link from '../Link'
+import NormalButton from '../Buttons/NormalButton'
 
 import { signOut, useSession } from "next-auth/react"
 import { closeSideMenu } from '../../redux/sideMenuSlicer'
@@ -25,6 +26,7 @@ function Navbar() {
     const dispatch = useDispatch()
     const cart = useSelector(state=>state.cart)
     const [loading, setLoading] = useState(true);
+    const [disableCheckout, setDisableCheckout] = useState(true);
     
     //get cart items
     useEffect(() => {
@@ -39,6 +41,7 @@ function Navbar() {
             } else {
                 dispatch(setCart(res.list))
                 setLoading(false)
+                setDisableCheckout(false)
             }
         })
     }, [])
@@ -57,7 +60,7 @@ function Navbar() {
                 <ul className='w-full h-full px-5'>
                     {cart.slice(0,5).map( (item, i) => 
                         <li key={`mini-cart-${i}`} 
-                            className={`flex ${i==cart.length-1?"":"border-b-2"} py-4 hover:cursor-pointer`}
+                            className={`flex ${i==4 || i==cart.length-1?"":"border-b-2"} py-4 hover:cursor-pointer`}
                             onClick={()=>push(`/menu/${item._id}`)}
                         >
                             <Badge count={item.qty} overflowCount={10}>
@@ -68,8 +71,17 @@ function Navbar() {
                             <span className='flex items-center w-[170px] ml-3 text-gray-500'> {item.name} </span>
                         </li>
                     )}
+                    {cart.length>5 && <div className='flex justify-center text-gray-500 text-sm'> Click below to check more your items </div>}
                     <Link className="underline my-2 justify-center" to="/cart"> View Details </Link>
-                    <CheckoutButton className="mt-2"/>
+                    { disableCheckout ? 
+                        <NormalButton className='py-2 flex justify-center w-full'
+                            onClick={()=>push("/auth/signin?callbackUrl=/cart")}
+                            bgColor='bg-gray-400'
+                        >
+                            Please Log In First
+                        </NormalButton> : 
+                        <CheckoutButton value="CHECK OUT" />
+                    }
                 </ul> :
                 <Empty description={false}>
                     <div className="flex flex-col space-y-1">
