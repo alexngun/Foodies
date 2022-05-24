@@ -111,7 +111,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ( {params} ) => {
 
-    const res = await fetch(`http://localhost:3000/api/menu/${params._id}`, {
+    const res = await fetch(`${process.env.HOST}/${params._id}`, {
         method: 'GET',
         mode: 'cors',
         cache: 'no-cache',
