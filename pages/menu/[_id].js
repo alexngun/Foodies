@@ -95,23 +95,25 @@ function Details( {data} ) {
     )
 }
 
-export const getStaticPaths = async () => {
+// export const getStaticPaths = async () => {
 
-    const res = await fetch('http://localhost:3000/api/menu')
-    var menu = await res.json()
-    menu = Object.entries(menu)[0][1]
+//     const res = await fetch('http://localhost:3000/api/menu')
+//     var menu = await res.json()
+//     menu = Object.entries(menu)[0][1]
 
-    return {
-        paths: menu.map( p => { return {
-            params: {_id: p._id}
-        }}),
-        fallback: false
-    }
-}
+//     return {
+//         paths: menu.map( p => { return {
+//             params: {_id: p._id}
+//         }}),
+//         fallback: false
+//     }
+// }
 
-export const getServerSideProps = async ( {params} ) => {
+export const getServerSideProps = async (context) => {
 
-    const res = await fetch(`${process.env.HOST}/${params._id}`, {
+    const { _id } = context.query
+
+    const res = await fetch(`${process.env.HOST}/api/menu/${_id}`, {
         method: 'GET',
         mode: 'cors',
         cache: 'no-cache',
