@@ -1,24 +1,10 @@
-import axios from 'axios'
-
 export const ConnectRemoteCart = async (method, payload) => {
     const request = payload ? {
         method: method,
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json'},
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
         body: JSON.stringify(payload)
     } : 
     {
         method: method,
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json'},
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
     }
 
     const res = await fetch(`${process.env.HOST}/api/cart`, request)
@@ -42,15 +28,7 @@ export const ConnectLocalCart = async () => {
         })
     
         if(params!=="") {
-            const res = await fetch(`${process.env.HOST}/api/menu/${params}`, {
-                method: "GET",
-                mode: 'cors',
-                cache: 'no-cache',
-                credentials: 'same-origin',
-                headers: { 'Content-Type': 'application/json'},
-                redirect: 'follow',
-                referrerPolicy: 'no-referrer',
-              })
+            const res = await fetch(`${process.env.HOST}/api/menu/${params}`)
             const post = await res.json()
     
             if(post.data) {
