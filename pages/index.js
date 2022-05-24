@@ -4,7 +4,6 @@ import Landing from '../components/Landing'
 import { Carousel } from 'antd'
 import NormalButton from '../components/Buttons/NormalButton'
 import ProductCards from '../components/ProductDisplay/ProductCards'
-import CommentSlider from '../components/Silder/commentSlider'
 import Footer from '../components/Footer'
 import Head from 'next/head'
 
