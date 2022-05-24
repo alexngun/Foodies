@@ -13,7 +13,6 @@ import { getMonth } from '../../utils/date'
 import { useState, useEffect } from "react"
 import { useRouter } from "next/router"
 import { useSelector } from "react-redux"
-import axios from 'axios'
 
 const sortMenu = (menu, category) => {
     
@@ -133,7 +132,7 @@ function index( {menu} ) {
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 
     const res = await fetch(`${process.env.HOST}/api/menu`)
     const menu = await res.json()

@@ -109,7 +109,7 @@ export const getStaticPaths = async () => {
     }
 }
 
-export const getStaticProps = async ( {params} ) => {
+export const getServerSideProps = async ( {params} ) => {
 
     const res = await fetch(`${process.env.HOST}/${params._id}`, {
         method: 'GET',
