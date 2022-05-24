@@ -4,8 +4,6 @@ import FacebookProvider from 'next-auth/providers/facebook'
 import GitHubProvider from "next-auth/providers/github";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import clientPromise from "../../../utils/mongodb"
-import { signIn } from 'next-auth/react';
-// import CredentialsProvider from "next-auth/providers/credentials"
 
 export default NextAuth({
     adapter: MongoDBAdapter(clientPromise),
@@ -13,13 +11,6 @@ export default NextAuth({
         GoogleProvider({
             clientId: process.env.GOOGLE_ID,
             clientSecret: process.env.GOOGLE_SECRET,
-            // authorization: {
-            //     params: {
-            //       prompt: "consent",
-            //       access_type: "offline",
-            //       response_type: "code"
-            //     }
-            //   }
         }),
         FacebookProvider({
             clientId: process.env.FACEBOOK_ID,
@@ -31,7 +22,11 @@ export default NextAuth({
         }),
     ],
     jwt: {
+        secret: process.env.JWT_SECRET,
         encryption: true,
+    },
+    session: {
+        jwt: true
     },
     secret: process.env.JWT_SECRET,
     pages: {

@@ -19,7 +19,7 @@ export const ConnectRemoteCart = async (method, payload) => {
         referrerPolicy: 'no-referrer',
     }
 
-    const res = await fetch("http://localhost:3000/api/cart", request)
+    const res = await fetch(`${process.env.HOST}/api/cart`, request)
     const post = await res.json()
     if(post.list) {
         for(var i = 0; i < post.list.length; i++)
@@ -40,7 +40,7 @@ export const ConnectLocalCart = async () => {
         })
     
         if(params!=="") {
-            const res = await fetch(`http://localhost:3000/api/menu/${params}`, {
+            const res = await fetch(`${process.env.HOST}/api/menu/${params}`, {
                 method: "GET",
                 mode: 'cors',
                 cache: 'no-cache',

@@ -91,7 +91,7 @@ function Navbar() {
                 <Empty description={false}>
                     <div className="flex flex-col space-y-1">
                         <span className='text-green-900'> Cart Empty</span>
-                        <Button type="primary" style={{background: "green", border: "green", marginTop: "1rem"}}>Shop Now</Button>
+                        <Button onClick={()=>push("/menu")} type="primary" style={{background: "green", border: "green", marginTop: "1rem"}}>Shop Now</Button>
                     </div>
                 </Empty>
             }

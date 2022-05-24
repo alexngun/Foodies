@@ -1,12 +1,12 @@
 import { useSession, signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
 
 import { AiOutlineGoogle, AiOutlineGithub, AiOutlineFacebook } from 'react-icons/ai'
 import { Result, Button, Alert } from 'antd'
 import Brand from '../../components/Brand'
 import LoadingPage from '../../components/LoadingPage'
 import Back from '../../components/Back'
-import { useState, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 function Signin() {
