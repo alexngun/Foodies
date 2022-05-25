@@ -1,34 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Foodies (E-commerce)
 
-## Getting Started
+[https://foodies-pi.vercel.app/](https://foodies-pi.vercel.app/)
 
-First, run the development server:
+## The website
 
-```bash
-npm run dev
-# or
-yarn dev
+<img src="./img/redux.png" width="25">
+<img src="./img/react-js.png" width="25">
+<img src="./img/next.png" width="25">
+<img src="./img/tailwind-css-icon.png" width="25">
+<img src="./img/pngwing.com.png" width="25">
+<img src="./img/mongo.png" width="25">
+<img src="./img/nextauth.png" width="25">
+
+- Built with redux, react, nextjs, tailwindcss, stripe, mongodb, next-auth.
+- A variant of MERN stack except this website is using nextjs built in api instead of ExpressJS.
+- Supports OAuth login and Stripe checkout session
+- Fully responsive website
+- All animations and transitions are aniamted by framer-motion
+
+To test out checkout session, use test card number 4242 4242 4242 4242, a random three-digit CVC number, and any expiration date in the future will be accepted.
+
+## Pages Demo
+
+![image info](./img/homepage.png)
+![image info](./img/checkoutpage.png)
+![image info](./img/productpage.png)
+![image info](./img/oauthpage.png)
+
+## Project Structure
+
+```
+$PROJECT_ROOT
+│   # Page files
+├── pages
+│   # React component files
+├── components
+│   # Non-react modules
+├── dist
+│   # compiled tailwindcss style sheet
+├── utils
+│   # helper functions
+├── redux
+│   # redux reduces, slicers and action creators
+├── hooks
+│   # custom react hooks
+└── public
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Materials
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- [<img src="./img/antdesign.png" width="25">](https://ant.design/) Ant design - A nice component library for React
+- [<img src="./img/undraw.jpeg" width="25">](https://undraw.co/) Undraw - A picture library for ui design
+- [<img src="./img/react-icons.svg" width="25">](https://react-icons.github.io/react-icons) React Icons - An icon component library for React
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Data
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+[<img src="./img/freshly-logo@logotyp.us.svg" width="200">](https://www.freshly.com/)
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+All testing data and product images are come from [Freshly](https://www.freshly.com/). If you are interested in their products, please check out their website. This website is only for learning purpose. No sensitive data will be recorded in this website.
