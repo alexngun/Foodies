@@ -7,7 +7,7 @@ function Link({className, children, onClick, color="text-green-700", to="/"}) {
   return (
     <div 
         className={`w-full h-full flex items-center ${color} hover:cursor-pointer ${className?className:""}`}
-        onClick={()=>{onClick();router.push(to)}}
+        onClick={()=>{onClick&&onClick(); router.push(to)}}
     >
         {children}
     </div>

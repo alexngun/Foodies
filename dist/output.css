@@ -922,6 +922,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 300px;
 }
 
+.min-h-\[700px\] {
+  min-height: 700px;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -932,18 +936,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .min-h-\[300px\] {
   min-height: 300px;
-}
-
-.min-h-\[800px\] {
-  min-height: 800px;
-}
-
-.min-h-\[750px\] {
-  min-height: 750px;
-}
-
-.min-h-\[700px\] {
-  min-height: 700px;
 }
 
 .w-full {
@@ -970,22 +962,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 90%;
 }
 
-.w-\[95\%\] {
-  width: 95%;
+.w-\[420px\] {
+  width: 420px;
 }
 
-.w-\[85\%\] {
-  width: 85%;
+.w-1\/2 {
+  width: 50%;
+}
+
+.w-\[95\%\] {
+  width: 95%;
 }
 
 .w-fit {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-}
-
-.w-3\/5 {
-  width: 60%;
 }
 
 .w-\[150px\] {
@@ -1032,28 +1024,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 160px;
 }
 
-.w-10 {
-  width: 2.5rem;
-}
-
-.w-\[400px\] {
-  width: 400px;
-}
-
-.w-\[420px\] {
-  width: 420px;
-}
-
-.w-1\/2 {
-  width: 50%;
-}
-
 .min-w-\[300px\] {
   min-width: 300px;
 }
 
 .max-w-\[450px\] {
   max-width: 450px;
+}
+
+.max-w-\[200px\] {
+  max-width: 200px;
 }
 
 .max-w-\[1000px\] {
@@ -1232,12 +1212,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.scale-\[130\%\] {
-  --tw-scale-x: 130%;
-  --tw-scale-y: 130%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
 .scale-\[80\%\] {
   --tw-scale-x: 80%;
   --tw-scale-y: 80%;
@@ -1314,6 +1288,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .grid-rows-2 {
   grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.flex-row {
+  flex-direction: row;
 }
 
 .flex-col {
@@ -1616,6 +1594,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 1rem;
 }
 
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -1641,11 +1629,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 0.75rem;
 }
 
-.py-1 {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
-
 .py-10 {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
@@ -1664,11 +1647,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-
-.px-3 {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
 }
 
 .py-\[10px\] {
@@ -1922,6 +1900,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(107 114 128 / 0.6);
 }
 
+.text-sky-800 {
+  --tw-text-opacity: 1;
+  color: rgb(7 89 133 / var(--tw-text-opacity));
+}
+
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -1954,11 +1937,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .text-gray-600\/80 {
   color: rgb(75 85 99 / 0.8);
-}
-
-.text-sky-800 {
-  --tw-text-opacity: 1;
-  color: rgb(7 89 133 / var(--tw-text-opacity));
 }
 
 .text-red-600 {
@@ -2084,6 +2062,10 @@ a {
 
   .sm\:h-\[120px\] {
     height: 120px;
+  }
+
+  .sm\:w-\[85\%\] {
+    width: 85%;
   }
 
   .sm\:w-\[300px\] {
@@ -2266,6 +2248,10 @@ a {
     width: 100%;
   }
 
+  .lg\:w-3\/5 {
+    width: 60%;
+  }
+
   .lg\:w-fit {
     width: -webkit-fit-content;
     width: -moz-fit-content;
@@ -2274,10 +2260,6 @@ a {
 
   .lg\:w-2\/5 {
     width: 40%;
-  }
-
-  .lg\:w-3\/5 {
-    width: 60%;
   }
 
   .lg\:w-\[300px\] {
@@ -2362,10 +2344,5 @@ a {
 
   .lg\:text-left {
     text-align: left;
-  }
-
-  .lg\:text-xl {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
   }
 }

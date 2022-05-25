@@ -1,6 +1,6 @@
 export function MiniNutrientsLabel({n}) {
   return (
-    <div className='h-fit w-fit rounded-lg border-[1px] sm:px-8 px-3 py-4'>
+    <div className='h-fit lg:w-fit rounded-lg border-[1px] sm:px-8 px-3 py-4 w-full'>
         <div className="pb-2 font-bold text-lg text-green-700">
             What's inside (info is per serving)
         </div>

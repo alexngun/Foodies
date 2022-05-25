@@ -56,17 +56,17 @@ function Details( {data} ) {
                     </div>
                     <IngredientsLabel ing6={data.ingredients6} ing={data.ingredientsAll}/>
                 </div>
-                <div className="lg:pt-0 pt-10 h-1/2 w-full lg:h-full lg:w-1/2 flex flex-col lg:pl-5 lg:items-start items-center">
+                <div className="lg:pt-0 pt-10 h-1/2 w-full lg:h-full lg:w-1/2 flex flex-col lg:pl-5 lg:items-start items-left">
                     <h1 className='hidden lg:block text-[25px] font-bold text-green-700 mb-0'> {data.name} </h1>
                     <div className='hidden lg:block text-[18px] text-gray-500 italic'>{data.subtitle}</div>
-                    <p className='w-[85%] lg:mt-6 text-gray-500 text-center mb-6 lg:text-left'> {data.des} </p>
+                    <p className='sm:w-[85%] w-full lg:mt-6 text-gray-500 mb-6 lg:text-left'> {data.des} </p>
                     <div className='flex space-x-2 lg:w-full w-fit mb-6'>
                         { data.tags.map( (tag, index) => <Tag color="green" key={index}>{tag}</Tag>) }
                     </div>
-                    <div className='text-sky-700 lg:text-xl lg:mb-0 font-bold text-2xl mb-6'> CAD{data.price} / serving </div>
-                    <div className='lg:flex-row flex flex-col h-[120px] w-3/5 items-center justify-between pb-6'>
-                        <QtySelector initial={1} onChange={handleChange} className="lg:scale-100 scale-[130%]"/>
-                        <NormalButton onClick={handleAddToCart} className='justify-center px-4 py-3 lg:py-2 text-sm font-bold w-full lg:w-fit'> 
+                    <div className='text-sky-700 lg:mb-0 font-bold text-lg'> CAD{data.price} / serving </div>
+                    <div className='flex-row flex h-[120px] lg:w-3/5 w-full items-center space-x-2 pb-6'>
+                        <QtySelector initial={1} onChange={handleChange} className=""/>
+                        <NormalButton onClick={handleAddToCart} className='justify-center px-4 py-3 lg:py-2 text-sm font-bold w-full max-w-[200px] lg:w-fit'> 
                             <BsCartPlus className='mr-1 -translate-y-[2px]'/> Add To Cart 
                         </NormalButton>
                     </div>
