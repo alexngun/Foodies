@@ -44,7 +44,7 @@ function Signin() {
       const cart = window.localStorage.getItem("cart")
       
       if(cart && Object.keys(cart).length > 2) {
-        fetch("http://localhost:3000/api/pushToCart/", {
+        fetch(`${HOST}/api/pushToCart/`, {
           method: "POST",
           mode: 'cors',
           cache: 'no-cache',
