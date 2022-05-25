@@ -59,6 +59,7 @@ function Details( {data} ) {
                 <div className="lg:pt-0 pt-10 h-1/2 w-full lg:h-full lg:w-1/2 flex flex-col lg:pl-5 lg:items-start items-left">
                     <h1 className='hidden lg:block text-[25px] font-bold text-green-700 mb-0'> {data.name} </h1>
                     <div className='hidden lg:block text-[18px] text-gray-500 italic'>{data.subtitle}</div>
+                    <h1 className='text-lg pt-2 text-green-700 font-bold block lg:hidden'> Product Description </h1>
                     <p className='sm:w-[85%] w-full lg:mt-6 text-gray-500 mb-6 lg:text-left'> {data.des} </p>
                     <div className='flex space-x-2 lg:w-full w-fit mb-6'>
                         { data.tags.map( (tag, index) => <Tag color="green" key={index}>{tag}</Tag>) }
