@@ -4,13 +4,15 @@
 
 ## The website
 
-<img src="./img/redux.png" width="25">
-<img src="./img/react-js.png" width="25">
-<img src="./img/next.png" width="25">
-<img src="./img/tailwind-css-icon.png" width="25">
-<img src="./img/pngwing.com.png" width="25">
-<img src="./img/mongo.png" width="25">
-<img src="./img/nextauth.png" width="25">
+<p float="left">
+    <img src="./img/redux.png" width="25">
+    <img src="./img/react-js.png" width="25">
+    <img src="./img/next.png" width="25">
+    <img src="./img/tailwind-css-icon.png" width="25">
+    <img src="./img/pngwing.com.png" width="25">
+    <img src="./img/mongo.png" width="25">
+    <img src="./img/nextauth.png" width="25">
+</p>
 
 - Built with redux, react, nextjs, tailwindcss, stripe, mongodb, next-auth.
 - A variant of MERN stack except this website is using nextjs built in api instead of ExpressJS.
